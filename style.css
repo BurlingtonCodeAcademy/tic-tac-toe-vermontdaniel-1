@@ -53,6 +53,7 @@ div.board {
   width: 608px;
   overflow: hidden;
   margin: 0 auto;
+  font-size: 12rem;
 }
 
 #player-one-name {

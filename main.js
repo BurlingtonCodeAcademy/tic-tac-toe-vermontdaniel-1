@@ -8,8 +8,15 @@ let resetButton = document.getElementById('reset'); //button
 let gameBoard = document.getElementsByClassName('board'); // class, contains all cell <div>s
 let inputPlayerOne = document.getElementById('player-one-name'); // input field
 let inputPlayerTwo = document.getElementById('player-two-name'); // input field
-let playerOneName = null; // stores player one name
-let playerTwoName = null; // stores player two name
+let timeDiv = document.getElementById('time'); // Used to display time
+let playerOneName = ''; // stores player one name
+let playerTwoName = ''; // stores player two name
+let secOnes = 0; //second in ones spot for game timer
+let secTens = 0; //second in tens spot for game timer
+let minOnes = 0; //minute in ones spot for game timer
+let minTens = 0; //minute in tens spot for game timer
+let hourOnes = 0; //hour in ones spot for game timer
+let hourTens = 0; //hour in tens spot for game timer
 
 //Set Cells to Variables ---------------------------------------------------------------------------------------------------------------------------------
 const cell0 = document.getElementById('cell-0');
@@ -45,6 +52,11 @@ function selectCell() {
     alert('Please select an empty cell.');
   }
 
+  //Stops player one from starting without player two
+  if (playerTwoName === '' && playerOneName !== '') {
+    alert('Please wait for Player Two to select a name.');
+  }
+
   //If Player One's turn ---------------------------------------------------------------------------------------------------------------------------------
   else if (status.textContent === `Player: ${playerOneName}'s turn!`) {
     // On click place an X
@@ -57,6 +69,10 @@ function selectCell() {
     winCheck();
     if (winCheck() === true) {
       status.textContent = `Player: ${playerOneName} has won!`;
+    }
+
+    if (playerOneName !== '' && playerTwoName !== '') {
+      setInterval(gameTimer, 500);
     }
   }
 
@@ -85,13 +101,69 @@ function winCheck() {
       //If they are all equal the same thing
       if (combo[0].textContent === combo[1].textContent && combo[1].textContent === combo[2].textContent) {
         // Strike a line through the characters
-        combo[0].style.setProperty('text-decoration', 'line-through');
-        combo[1].style.setProperty('text-decoration', 'line-through');
-        combo[2].style.setProperty('text-decoration', 'line-through');
+        combo[0].style.setProperty('color', 'gold');
+        combo[1].style.setProperty('color', 'gold');
+        combo[2].style.setProperty('color', 'gold');
         return true;
       }
     }
   }
+}
+
+// WORK ON THIS FREAKING TIMER
+// Game Timer --------------------------------------------------------------------------------------------------------------------------------------------
+function gameTimer() {
+
+  // Keeps Track of hours in tens place
+   if (hourTens <= 9 && hourOnes > 0) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (hourTens >= 9) {
+    timeDiv.textContent = 'I think you have spent way too much time playing a single tic tac toe game.';
+  }
+  
+  // keeps track of hours in ones place
+   if (hourOnes <= 9 ) {
+    hourOnes += 1;
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (hourOnes >= 9) {
+    hourTens += 1;
+    hourOnes = 0;
+  }
+
+  // keeps track of minutes in tens place
+   if (minTens <= 6) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (minTens >= 5) {
+    hourOnes += 1;
+    minTens = 0;
+  }
+
+  // keeps track of minutes in ones place
+   if (minOnes <= 9) {
+    minOnes += 1;
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (minOnes >= 9) {
+    minTens += 1;
+    minOnes = 0;
+  }
+
+  // keeps track of seconds in tens place
+   if (secTens <= 5) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (secTens >= 5) {
+    minOnes += 1;
+    secTens = 0;
+  }
+  
+  // keeps track of seconds in ones place
+  if (secOnes <= 9) {
+    secOnes += 1;
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  } else if (secOnes >= 9) {
+    secOnes = 0;
+    secTens += 1;
+  }
+
 }
 
 //Event Listeners ****************************************************************************************************************************************
@@ -125,6 +197,8 @@ inputPlayerTwo.addEventListener('keypress', enter => {
 
 //Start two Player game ----------------------------------------------------------------------------------------------------------------------------------
 twoPlayerButton.addEventListener('click', () => {
+  timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+
   //Disable two player button
   event.target.disabled = true;
 
@@ -138,8 +212,14 @@ twoPlayerButton.addEventListener('click', () => {
 
 //Start one Player game ----------------------------------------------------------------------------------------------------------------------------------
 onePlayerButton.addEventListener('click', () => {
+  // disables one player button
   event.target.disabled = true;
+
+  // disables two player button
   twoPlayerButton.disabled = true;
+
+  //starts timer
+  setInterval(gameTimer, 1000);
 });
 
 //Reset the game -----------------------------------------------------------------------------------------------------------------------------------------
