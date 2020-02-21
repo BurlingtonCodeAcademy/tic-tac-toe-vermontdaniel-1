@@ -54,3 +54,15 @@ div.board {
   overflow: hidden;
   margin: 0 auto;
 }
+
+#player-one-name {
+  display: none;
+  text-align: center;
+  float: left;
+}
+
+#player-two-name {
+  display: none;
+  text-align: center;
+  float: right;
+}

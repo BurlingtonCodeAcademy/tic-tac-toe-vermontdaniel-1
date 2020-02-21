@@ -1,11 +1,15 @@
 //Variables from HTML*************************************************************************************************************************************
 
 //Game setup variables------------------------------------------------------------------------------------------------------------------------------------
-let startButton = document.getElementById('start');
-let status = document.getElementById('status');
-let resetButton = document.getElementById('reset');
-let gameBoard = document.getElementsByClassName('board');
-//let arrayGameBoard = Array.from(gameBoard.children);
+let onePlayerButton = document.getElementById('player-one'); //Button
+let twoPlayerButton = document.getElementById('player-two'); //Button
+let status = document.getElementById('status'); // Used to display text above buttons
+let resetButton = document.getElementById('reset'); //button
+let gameBoard = document.getElementsByClassName('board'); // class, contains all cell <div>s
+let inputPlayerOne = document.getElementById('player-one-name'); // input field
+let inputPlayerTwo = document.getElementById('player-two-name'); // input field
+let playerOneName = null; // stores player one name
+let playerTwoName = null; // stores player two name
 
 //Set Cells to Variables ---------------------------------------------------------------------------------------------------------------------------------
 const cell0 = document.getElementById('cell-0');
@@ -40,24 +44,34 @@ function selectCell() {
   if (event.target.textContent === 'X' || event.target.textContent === 'O') {
     alert('Please select an empty cell.');
   }
-  //If Player X turn, can place X in cell
-  else if (status.textContent === "Player X's turn") {
+
+  //If Player One's turn ---------------------------------------------------------------------------------------------------------------------------------
+  else if (status.textContent === `Player: ${playerOneName}'s turn!`) {
+    // On click place an X
     event.target.textContent = 'X';
-    status.textContent = "Player O's turn";
+
+    // Change to player two
+    status.textContent = `Player: ${playerTwoName}'s turn!`;
+
     //Checks if after click, player X wins
     winCheck();
     if (winCheck() === true) {
-      status.textContent = 'Player X has won!';
+      status.textContent = `Player: ${playerOneName} has won!`;
     }
   }
-  //If Player O turn, can place O in cell
-  else if (status.textContent === "Player O's turn") {
+
+  //If Player Two's turn ---------------------------------------------------------------------------------------------------------------------------------
+  else if (status.textContent === `Player: ${playerTwoName}'s turn!`) {
+    // On click place an O
     event.target.textContent = 'O';
-    status.textContent = "Player X's turn";
+
+    // Change to Player One
+    status.textContent = `Player: ${playerOneName}'s turn!`;
+
     //Checks if after click, player O wins
     winCheck();
     if (winCheck() === true) {
-      status.textContent = 'Player O has won!';
+      status.textContent = `Player: ${playerTwoName} has won!`;
     }
   }
 }
@@ -70,10 +84,10 @@ function winCheck() {
     if (combo[0].textContent !== '') {
       //If they are all equal the same thing
       if (combo[0].textContent === combo[1].textContent && combo[1].textContent === combo[2].textContent) {
+        // Strike a line through the characters
         combo[0].style.setProperty('text-decoration', 'line-through');
         combo[1].style.setProperty('text-decoration', 'line-through');
         combo[2].style.setProperty('text-decoration', 'line-through');
-
         return true;
       }
     }
@@ -82,26 +96,65 @@ function winCheck() {
 
 //Event Listeners ****************************************************************************************************************************************
 
-//Start the game -----------------------------------------------------------------------------------------------------------------------------------------
-startButton.addEventListener('click', () => {
+//Assign Player One's Name -------------------------------------------------------------------------------------------------------------------------------
+inputPlayerOne.addEventListener('keypress', enter => {
+  //if Enter is pressed
+  if (enter.key === 'Enter') {
+    // Player one's name === input text
+    playerOneName = inputPlayerOne.value;
+
+    // Sets up game to read status correctly
+    status.textContent = `Player: ${playerOneName}'s turn!`;
+
+    // removes input box
+    inputPlayerOne.style.setProperty('display', 'none');
+  }
+});
+
+//Assign Player Two's Name -------------------------------------------------------------------------------------------------------------------------------
+inputPlayerTwo.addEventListener('keypress', enter => {
+  //If Enter is pressed
+  if (enter.key === 'Enter') {
+    // player two's name === input text
+    playerTwoName = inputPlayerTwo.value;
+
+    // removes input box
+    inputPlayerTwo.style.setProperty('display', 'none');
+  }
+});
+
+//Start two Player game ----------------------------------------------------------------------------------------------------------------------------------
+twoPlayerButton.addEventListener('click', () => {
+  //Disable two player button
   event.target.disabled = true;
-  status.textContent = "Player X's turn";
+
+  //Disable one player button
+  onePlayerButton.disabled = true;
+
+  //Show input text fields
+  inputPlayerOne.style.setProperty('display', 'block');
+  inputPlayerTwo.style.setProperty('display', 'block');
+});
+
+//Start one Player game ----------------------------------------------------------------------------------------------------------------------------------
+onePlayerButton.addEventListener('click', () => {
+  event.target.disabled = true;
+  twoPlayerButton.disabled = true;
 });
 
 //Reset the game -----------------------------------------------------------------------------------------------------------------------------------------
 resetButton.addEventListener('click', () => {
   //remove status content
   status.textContent = '';
-  //resets start button
-  startButton.disabled = false;
-  //forces webapp to reload to restart game
-  window.location.reload()
 
-  //might use
-  //for (let cell of arrayGameBoard) {
-  //  console.log(cell)
-  //  cell.textContent = '';
-  //}
+  //resets One Player button
+  onePlayerButton.disabled = false;
+
+  //resets two Player
+  twoPlayerButton.disabled = false;
+
+  //forces webapp to reload to restart game
+  window.location.reload();
 });
 
 //Selecting a cell ---------------------------------------------------------------------------------------------------------------------------------------
