@@ -1,4 +1,4 @@
-//Variables from HTML*************************************************************************************************************************************
+//Variables **********************************************************************************************************************************************
 
 //Game setup variables------------------------------------------------------------------------------------------------------------------------------------
 let onePlayerButton = document.getElementById('player-one'); //Button
@@ -17,6 +17,7 @@ let minOnes = 0; //minute in ones spot for game timer
 let minTens = 0; //minute in tens spot for game timer
 let hourOnes = 0; //hour in ones spot for game timer
 let hourTens = 0; //hour in tens spot for game timer
+let timeInterval = '';
 
 //Set Cells to Variables ---------------------------------------------------------------------------------------------------------------------------------
 const cell0 = document.getElementById('cell-0');
@@ -47,6 +48,7 @@ const winCombos = {
 
 //Decides if an X or O is placed in a cell ---------------------------------------------------------------------------------------------------------------
 function selectCell() {
+  // Sanitize clicks -------------------------------------------------------------------------------------------------------------------------------------
   //Alerts If theres already an X or O
   if (event.target.textContent === 'X' || event.target.textContent === 'O') {
     alert('Please select an empty cell.');
@@ -69,10 +71,6 @@ function selectCell() {
     winCheck();
     if (winCheck() === true) {
       status.textContent = `Player: ${playerOneName} has won!`;
-    }
-
-    if (playerOneName !== '' && playerTwoName !== '') {
-      setInterval(gameTimer, 10);
     }
   }
 
@@ -104,6 +102,7 @@ function winCheck() {
         combo[0].style.setProperty('color', 'gold');
         combo[1].style.setProperty('color', 'gold');
         combo[2].style.setProperty('color', 'gold');
+        clearInterval(timeInterval);
         return true;
       }
     }
@@ -188,6 +187,11 @@ inputPlayerOne.addEventListener('keypress', enter => {
     // removes input box
     inputPlayerOne.style.setProperty('display', 'none');
   }
+  
+  //Starts timer
+  if (playerOneName !== '' && playerTwoName !== '') {
+    timeInterval = setInterval(gameTimer, 1000);
+  }
 });
 
 //Assign Player Two's Name -------------------------------------------------------------------------------------------------------------------------------
@@ -200,11 +204,16 @@ inputPlayerTwo.addEventListener('keypress', enter => {
     // removes input box
     inputPlayerTwo.style.setProperty('display', 'none');
   }
+
+  //Starts timer
+  if (playerOneName !== '' && playerTwoName !== '') {
+    timeInterval = setInterval(gameTimer, 1000);
+  }
 });
 
 //Start two Player game ----------------------------------------------------------------------------------------------------------------------------------
 twoPlayerButton.addEventListener('click', () => {
-  timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  //timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
 
   //Disable two player button
   event.target.disabled = true;
