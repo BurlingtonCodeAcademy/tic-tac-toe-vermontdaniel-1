@@ -72,7 +72,7 @@ function selectCell() {
     }
 
     if (playerOneName !== '' && playerTwoName !== '') {
-      setInterval(gameTimer, 500);
+      setInterval(gameTimer, 10);
     }
   }
 
@@ -110,60 +110,67 @@ function winCheck() {
   }
 }
 
-// WORK ON THIS FREAKING TIMER
 // Game Timer --------------------------------------------------------------------------------------------------------------------------------------------
 function gameTimer() {
-
-  // Keeps Track of hours in tens place
-   if (hourTens <= 9 && hourOnes > 0) {
-    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (hourTens >= 9) {
-    timeDiv.textContent = 'I think you have spent way too much time playing a single tic tac toe game.';
-  }
-  
-  // keeps track of hours in ones place
-   if (hourOnes <= 9 ) {
-    hourOnes += 1;
-    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (hourOnes >= 9) {
-    hourTens += 1;
-    hourOnes = 0;
-  }
-
-  // keeps track of minutes in tens place
-   if (minTens <= 6) {
-    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (minTens >= 5) {
-    hourOnes += 1;
-    minTens = 0;
-  }
-
-  // keeps track of minutes in ones place
-   if (minOnes <= 9) {
-    minOnes += 1;
-    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (minOnes >= 9) {
-    minTens += 1;
-    minOnes = 0;
-  }
-
-  // keeps track of seconds in tens place
-   if (secTens <= 5) {
-    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (secTens >= 5) {
-    minOnes += 1;
-    secTens = 0;
-  }
-  
-  // keeps track of seconds in ones place
+  // keeps track of seconds in ones place ----------------------------------------------------------------------------------------------------------------
   if (secOnes <= 9) {
     secOnes += 1;
     timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
-  } else if (secOnes >= 9) {
-    secOnes = 0;
-    secTens += 1;
+    //reset to 0, add 1 to secTens
+    if (secOnes === 10) {
+      secOnes = 0;
+      secTens += 1;
+    }
   }
 
+  // keeps track of seconds in tens place ----------------------------------------------------------------------------------------------------------------
+  if (secTens <= 5) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  }
+  // reset to 0, add 1 to minOnes
+  else if (secTens === 6) {
+    secTens = 0;
+    minOnes += 1;
+  }
+
+  // keeps track of minutes in ones place ----------------------------------------------------------------------------------------------------------------
+  if (minOnes <= 9) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  }
+  //reset to 0, add 1 to minTens
+  else if (minOnes === 10) {
+    minOnes = 0;
+    minTens += 1;
+  }
+
+  // keeps track of minutes in tens place ----------------------------------------------------------------------------------------------------------------
+  if (minTens <= 5) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  }
+  // reset to 0, add 1 to hourOnes
+  else if (minTens === 6) {
+    minTens = 0;
+    hourOnes += 1;
+  }
+
+  // keeps track of hours in ones place ------------------------------------------------------------------------------------------------------------------
+  if (hourOnes <= 9) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  }
+  // reset to 0, add 1 to hourTens
+  else if (hourOnes === 10) {
+    hourOnes = 0;
+    hourTens += 1;
+  }
+
+  // Keeps Track of hours in tens place ------------------------------------------------------------------------------------------------------------------
+  if (hourTens <= 9) {
+    timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
+  }
+  //Stops if it becomes greater than 9
+  else if (hourTens === 10) {
+    timeDiv.textContent = 'I think you have spent way too much time playing a single tic tac toe game.';
+  }
 }
 
 //Event Listeners ****************************************************************************************************************************************
