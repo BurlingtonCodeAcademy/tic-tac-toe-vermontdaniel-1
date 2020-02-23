@@ -17,7 +17,7 @@ let minOnes = 0; //minute in ones spot for game timer
 let minTens = 0; //minute in tens spot for game timer
 let hourOnes = 0; //hour in ones spot for game timer
 let hourTens = 0; //hour in tens spot for game timer
-let timeInterval = '';
+let timeInterval = ''; // will be assigned to setInterval
 
 //Set Cells to Variables ---------------------------------------------------------------------------------------------------------------------------------
 const cell0 = document.getElementById('cell-0');
@@ -60,17 +60,31 @@ function selectCell() {
   }
 
   //If Player One's turn ---------------------------------------------------------------------------------------------------------------------------------
-  else if (status.textContent === `Player: ${playerOneName}'s turn!`) {
+
+  // Checks if it is human vs. computer or player vs. player
+  else if (status.textContent === `Player: ${playerOneName}'s turn!` || status.textContent === "Human's turn!") {
     // On click place an X
     event.target.textContent = 'X';
 
-    // Change to player two
-    status.textContent = `Player: ${playerTwoName}'s turn!`;
+    // Change to player two if two player game is clicked
+    if (playerTwoName !== '') {
+      status.textContent = `Player: ${playerTwoName}'s turn!`;
+    }
+    // Change to computer's turn if one player game is clicked
+    else {
+      status.textContent = "Computer's turn!";
+    }
 
-    //Checks if after click, player X wins
+    //Checks if after click, player one wins on two player
     winCheck();
     if (winCheck() === true) {
-      status.textContent = `Player: ${playerOneName} has won!`;
+      if (status.textContent !== "Human's turn!") {
+        status.textContent = `Player: ${playerOneName} has won!`;
+      }
+      // Checks if after click, human wins
+      else {
+        status.textContent = 'The human wins!';
+      }
     }
   }
 
@@ -82,10 +96,19 @@ function selectCell() {
     // Change to Player One
     status.textContent = `Player: ${playerOneName}'s turn!`;
 
-    //Checks if after click, player O wins
+    //Checks if after click, player two wins
     winCheck();
     if (winCheck() === true) {
       status.textContent = `Player: ${playerTwoName} has won!`;
+    }
+  }
+
+  //If Computer's turn -----------------------------------------------------------------------------------------------------------------------------------
+  else if (status.textContent === "Computer's turn!") {
+    computerAi()
+    winCheck()
+    if (winCheck() === true) {
+      status.textContent = 'The Computer Wins!'
     }
   }
 }
@@ -172,6 +195,51 @@ function gameTimer() {
   }
 }
 
+// Computer AI -------------------------------------------------------------------------------------------------------------------------------------------
+function computerAi() {
+  // Check all winning combos
+  for (let combo of Object.values(winCombos)) {
+    // Human is one away from winning --------------------------------------------------------------------------------------------------------------------
+    // if the first two cells have an X
+    if (combo[0].textContent === 'X' && combo[1].textContent === 'X') {
+      // Place an O in the third cell, change to human
+      combo[3].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+    // if the last two cells have an X
+    else if (combo[1].textContent === 'X' && combo[2].textContent === 'X') {
+      // Place an O in the first cell, change to human
+      combo[1].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+    // if the first and last cells have an X
+    else if (combo[0].textContent === 'X' && combo[2].textContent === 'X') {
+      combo[1].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+
+    // Human is two away from winning --------------------------------------------------------------------------------------------------------------------
+    // if first cell has an X
+    else if (combo[0].textContent === 'X') {
+      // Place an O in the second cell, change to human
+      combo[1].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+    // if second cell has an X
+    else if (combo[1].textContent === 'X') {
+      // Place an O in the third cell, change to human
+      combo[2].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+    // if third cell has an X
+    else if (combo[2].textContent === 'X') {
+      // Place 0 in second cell, change to human
+      combo[1].textContent = 'O';
+      status.textContent = "Human's turn!";
+    }
+  }
+}
+
 //Event Listeners ****************************************************************************************************************************************
 
 //Assign Player One's Name -------------------------------------------------------------------------------------------------------------------------------
@@ -187,7 +255,7 @@ inputPlayerOne.addEventListener('keypress', enter => {
     // removes input box
     inputPlayerOne.style.setProperty('display', 'none');
   }
-  
+
   //Starts timer
   if (playerOneName !== '' && playerTwoName !== '') {
     timeInterval = setInterval(gameTimer, 1000);
@@ -234,8 +302,11 @@ onePlayerButton.addEventListener('click', () => {
   // disables two player button
   twoPlayerButton.disabled = true;
 
+  //Starts with Player X
+  status.textContent = "Human's turn!";
+
   //starts timer
-  setInterval(gameTimer, 1000);
+  timeInterval = setInterval(gameTimer, 1000);
 });
 
 //Reset the game -----------------------------------------------------------------------------------------------------------------------------------------
