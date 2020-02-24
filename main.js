@@ -195,49 +195,55 @@ function gameTimer() {
   }
 }
 
-// Computer AI -------------------------------------------------------------------------------------------------------------------------------------------
-function computerAi() {
-  // Check all winning combos
-  for (let combo of Object.values(winCombos)) {
-    // Human is one away from winning --------------------------------------------------------------------------------------------------------------------
-    // if the first two cells have an X
-    if (combo[0].textContent === 'X' && combo[1].textContent === 'X') {
-      // Place an O in the third cell, change to human
-      combo[3].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
-    // if the last two cells have an X
-    else if (combo[1].textContent === 'X' && combo[2].textContent === 'X') {
-      // Place an O in the first cell, change to human
-      combo[1].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
-    // if the first and last cells have an X
-    else if (combo[0].textContent === 'X' && combo[2].textContent === 'X') {
-      combo[1].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
+// Computer AI (NOT WORKING) -----------------------------------------------------------------------------------------------------------------------------
+ function computerAi() {
+//   // Check all winning combos
+//   for (let combo of Object.values(winCombos)) {
+//     // Human is one away from winning --------------------------------------------------------------------------------------------------------------------
+//     // if the first two cells have an X
+//     if (combo[0].textContent === 'X' && combo[1].textContent === 'X') {
+//       // Place an O in the third cell, change to human
+//       combo[3].click(combo[3].textContent) = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
+//     // if the last two cells have an X
+//     else if (combo[1].textContent === 'X' && combo[2].textContent === 'X') {
+//       // Place an O in the first cell, change to human
+//       combo[1].textContent = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
+//     // if the first and last cells have an X
+//     else if (combo[0].textContent === 'X' && combo[2].textContent === 'X') {
+//       combo[1].textContent = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
 
-    // Human is two away from winning --------------------------------------------------------------------------------------------------------------------
-    // if first cell has an X
-    else if (combo[0].textContent === 'X') {
-      // Place an O in the second cell, change to human
-      combo[1].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
-    // if second cell has an X
-    else if (combo[1].textContent === 'X') {
-      // Place an O in the third cell, change to human
-      combo[2].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
-    // if third cell has an X
-    else if (combo[2].textContent === 'X') {
-      // Place 0 in second cell, change to human
-      combo[1].textContent = 'O';
-      status.textContent = "Human's turn!";
-    }
-  }
+//     // Human is two away from winning --------------------------------------------------------------------------------------------------------------------
+//     // if first cell has an X
+//     else if (combo[0].textContent === 'X') {
+//       // Place an O in the second cell, change to human
+//       combo[1].textContent = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
+//     // if second cell has an X
+//     else if (combo[1].textContent === 'X') {
+//       // Place an O in the third cell, change to human
+//       combo[2].textContent = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
+//     // if third cell has an X
+//     else if (combo[2].textContent === 'X') {
+//       // Place 0 in second cell, change to human
+//       combo[1].textContent = 'O';
+//       status.textContent = "Human's turn!";
+//       break;
+//     }
+//   }
 }
 
 //Event Listeners ****************************************************************************************************************************************
