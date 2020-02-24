@@ -30,6 +30,19 @@ const cell6 = document.getElementById('cell-6');
 const cell7 = document.getElementById('cell-7');
 const cell8 = document.getElementById('cell-8');
 
+//Look up table ******************************************************************************************************************************************
+cellLookUp = {
+  cell0: cell0,
+  cell1: cell1,
+  cell2: cell2,
+  cell3: cell3,
+  cell4: cell4,
+  cell5: cell5,
+  cell6: cell6,
+  cell7: cell7,
+  cell8: cell8,
+};
+
 //Winning Solutions **************************************************************************************************************************************
 
 //cell0 = bottom left square
@@ -105,10 +118,10 @@ function selectCell() {
 
   //If Computer's turn -----------------------------------------------------------------------------------------------------------------------------------
   else if (status.textContent === "Computer's turn!") {
-    computerAi()
-    winCheck()
+    computerAi();
+    winCheck();
     if (winCheck() === true) {
-      status.textContent = 'The Computer Wins!'
+      status.textContent = 'The Computer Wins!';
     }
   }
 }
@@ -196,54 +209,53 @@ function gameTimer() {
 }
 
 // Computer AI (NOT WORKING) -----------------------------------------------------------------------------------------------------------------------------
- function computerAi() {
-//   // Check all winning combos
-//   for (let combo of Object.values(winCombos)) {
-//     // Human is one away from winning --------------------------------------------------------------------------------------------------------------------
-//     // if the first two cells have an X
-//     if (combo[0].textContent === 'X' && combo[1].textContent === 'X') {
-//       // Place an O in the third cell, change to human
-//       combo[3].click(combo[3].textContent) = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-//     // if the last two cells have an X
-//     else if (combo[1].textContent === 'X' && combo[2].textContent === 'X') {
-//       // Place an O in the first cell, change to human
-//       combo[1].textContent = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-//     // if the first and last cells have an X
-//     else if (combo[0].textContent === 'X' && combo[2].textContent === 'X') {
-//       combo[1].textContent = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-
-//     // Human is two away from winning --------------------------------------------------------------------------------------------------------------------
-//     // if first cell has an X
-//     else if (combo[0].textContent === 'X') {
-//       // Place an O in the second cell, change to human
-//       combo[1].textContent = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-//     // if second cell has an X
-//     else if (combo[1].textContent === 'X') {
-//       // Place an O in the third cell, change to human
-//       combo[2].textContent = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-//     // if third cell has an X
-//     else if (combo[2].textContent === 'X') {
-//       // Place 0 in second cell, change to human
-//       combo[1].textContent = 'O';
-//       status.textContent = "Human's turn!";
-//       break;
-//     }
-//   }
+function computerAi() {
+  //   // Check all winning combos
+  //   for (let combo of Object.values(winCombos)) {
+  //     // Human is one away from winning --------------------------------------------------------------------------------------------------------------------
+  //     // if the first two cells have an X
+  //     if (combo[0].textContent === 'X' && combo[1].textContent === 'X') {
+  //       // Place an O in the third cell, change to human
+  //       combo[3].click(combo[3].textContent) = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //     // if the last two cells have an X
+  //     else if (combo[1].textContent === 'X' && combo[2].textContent === 'X') {
+  //       // Place an O in the first cell, change to human
+  //       combo[1].textContent = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //     // if the first and last cells have an X
+  //     else if (combo[0].textContent === 'X' && combo[2].textContent === 'X') {
+  //       combo[1].textContent = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //     // Human is two away from winning --------------------------------------------------------------------------------------------------------------------
+  //     // if first cell has an X
+  //     else if (combo[0].textContent === 'X') {
+  //       // Place an O in the second cell, change to human
+  //       combo[1].textContent = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //     // if second cell has an X
+  //     else if (combo[1].textContent === 'X') {
+  //       // Place an O in the third cell, change to human
+  //       combo[2].textContent = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //     // if third cell has an X
+  //     else if (combo[2].textContent === 'X') {
+  //       // Place 0 in second cell, change to human
+  //       combo[1].textContent = 'O';
+  //       status.textContent = "Human's turn!";
+  //       break;
+  //     }
+  //   }
 }
 
 //Event Listeners ****************************************************************************************************************************************
