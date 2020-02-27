@@ -1,69 +1,154 @@
-body {
-  background-color: rgb(255, 255, 255);
-  width: 1000px;
-  margin: 10px auto;
-  text-align: center;
-  padding: 10px;
-  user-select: none;
-}
-
-h2 {
-  font-size: 30px;
-  text-align: center;
-  height: 75px;
-}
-
-span{
-  font-size: 75px;
-  margin-top: 20px;
-}
-
-div[id^="row-"] div {
-  width: 200px;
-  height: 200px;
-  border: 1px solid red;
-  float: left;
-
-}
-
-div[id^="row-"] div:last-child {
-  border-right: none;
-}
-
-div[id^="row-"] div:first-child {
-  border-left: none;
-}
-
-div[id="row-1"] div{
-  border-top: none;
-}
-
-div[id="row-3"] div{
-    border-bottom: none;
-}
-
-div[id^="row-"] {
-  clear: float;
-  width: 608px;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
-div.board {
-  width: 608px;
-  overflow: hidden;
-  margin: 0 auto;
-  font-size: 12rem;
+body {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-column: 1fr;
+  grid-row: 1fr 1fr 1fr;
+  grid-template-areas:
+    'header'
+    'board'
+    'footer';
 }
 
-#player-one-name {
-  display: none;
-  text-align: center;
-  float: left;
+/* Header //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Title ************************************************************************************************************************************************/
+#title {
+  display: flex;
+  grid-area: title;
+  justify-content: center;
+  align-content: center;
+  font-size: 2.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  color: #1f2833;
+  text-shadow: 2px 2px 4px gray;
+  border-bottom: 1px solid gray;
+  margin-top: 3vh;
+  margin-left: 38vw;
+  margin-right: 38vw;
 }
 
-#player-two-name {
-  display: none;
-  text-align: center;
-  float: right;
+/* Time *************************************************************************************************************************************************/
+#time {
+  display: flex;
+  grid-area: time;
+  justify-content: center;
+  align-content: center;
+  font-size: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  color: #1f2833;
+  text-shadow: 2px 2px 4px gray;
+  border-bottom: 1px solid gray;
+  margin-top: 1vh;
+  margin-left: 45vw;
+  margin-right: 45vw;
+}
+
+/* Board ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#board {
+  display: grid;
+  grid-area: board;
+  grid-column: 1fr 1fr 1fr;
+  grid-row: 1fr 1fr 1fr;
+  grid-template-areas:
+    'cell6 cell7 cell8'
+    'cell3 cell4 cell5'
+    'cell0 cell1 cell2';
+  gap: 1rem 1rem;
+  margin-top: -15vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+  margin-bottom: -15vh;
+  background-color: #d8c3a5;
+  border: 1rem solid #d8c3a5;
+  box-shadow: 2px 2px 4px #e98074;
+}
+
+.cell {
+  display: flex;
+  background-color: grey;
+  box-shadow: 2px 2px 4px #e98074;
+}
+
+/* Footer //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#footer {
+  display: grid;
+  grid-column: 1fr 1fr 1fr;
+  grid-row: 1fr 1fr 1fr;
+  grid-template-areas:
+    '.               status             .           '
+    'buttons         buttons            buttons     '
+    'input-fields    input-fields       input-fields';
+  margin-top: 15vh;
+}
+
+/* Status ***********************************************************************************************************************************************/
+#status {
+  display: flex;
+  grid-area: status;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  color: #1f2833;
+  text-shadow: 2px 2px 4px gray;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin-top: 3vh;
+  margin-bottom: -5vh;
+}
+/* Buttons **********************************************************************************************************************************************/
+#buttons {
+  display: grid;
+  grid-area: buttons;
+  grid-column: 1fr 1fr 1fr;
+  grid-row: 1fr;
+  grid-template-areas: 'player-one reset player-two';
+  gap: 1rem 1rem;
+  margin-top: 7vh;
+  margin-bottom: -2vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 3rem;
+  font-size: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  color: #1f2833;
+  text-shadow: 2px 2px 4px gray;
+  background-image: linear-gradient(to right, #d4a59a, #d4a5af, #f3e0dc);
+}
+
+/* Input Fields *****************************************************************************************************************************************/
+
+#input-fields {
+  display: grid;
+  grid-area: input-fields;
+  grid-column: 1fr  1fr;
+  grid-row: 1fr;
+  grid-template-areas: 'player-one-name player-two-name';
+  gap: 1rem 1rem;
+  margin-bottom: 2vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+}
+
+.input {
+  display: flex;
+  height: 2rem;
 }

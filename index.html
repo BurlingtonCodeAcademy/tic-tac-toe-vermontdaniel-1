@@ -9,34 +9,50 @@
   </head>
 
   <body>
-    <h2>Tic Tac Toe</h2>
-    <div class="board">
-      <div id="row-1">
-        <div id="cell-0"></div>
-        <div id="cell-1"></div>
-        <div id="cell-2"></div>
+    <!--Header-->
+    <div id="header">
+      <!--Title-->
+      <div id="title">TIC TAC TOE</div>
+      <!--Time-->
+      <div id="time"></div>
+    </div>
+
+    <!--Tic Tac Toe Board-->
+    <div id="board">
+      <!--Bottom Row-->
+      <div id="cell-0" class="cell"></div>
+      <div id="cell-1" class="cell"></div>
+      <div id="cell-2" class="cell"></div>
+
+      <!--Middle Row-->
+      <div id="cell-3" class="cell"></div>
+      <div id="cell-4" class="cell"></div>
+      <div id="cell-5" class="cell"></div>
+
+      <!--Top Row-->
+      <div id="cell-6" class="cell"></div>
+      <div id="cell-7" class="cell"></div>
+      <div id="cell-8" class="cell"></div>
+    </div>
+
+    <!--Footer-->
+    <div id="footer">
+      <!--Status of Game-->
+      <div id="status"></div>
+
+      <!--Buttons-->
+      <div id="buttons">
+        <button id="player-one" type="button" class="button">One Player</button>
+        <button id="reset" type="button" class="button">Reset Game</button>
+        <button id="player-two" type="button" class="button">Two Players</button>
       </div>
-      <div id="row-2">
-        <div id="cell-3"></div>
-        <div id="cell-4"></div>
-        <div id="cell-5"></div>
-      </div>
-      <div id="row-3">
-        <div id="cell-6"></div>
-        <div id="cell-7"></div>
-        <div id="cell-8"></div>
+
+      <!--Name Input Fields-->
+      <div id="input-fields">
+        <input id="player-one-name" type="text" placeholder="Player One's Name:" class="input" />
+        <input id="player-two-name" type="text" placeholder="Player Two's Name:" class="input" />
       </div>
     </div>
-    <div id="time"></div>
-    <div id="status"></div>
-    <button id="player-one" type="button">One Player</button>
-    <button id="player-two" type="button">Two Players</button>
-    <br />
-    <input id="player-one-name" type="text" placeholder="Player One's Name:" />
-    <input id="player-two-name" type="text" placeholder="Player Two's Name:" />
-    <br />
-    <br />
-    <button id="reset" type="button">Reset Game</button>
     <script src="main.js"></script>
   </body>
 </html>

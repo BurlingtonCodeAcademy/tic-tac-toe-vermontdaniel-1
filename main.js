@@ -29,7 +29,10 @@ const cell5 = document.getElementById('cell-5');
 const cell6 = document.getElementById('cell-6');
 const cell7 = document.getElementById('cell-7');
 const cell8 = document.getElementById('cell-8');
-let cellArray = [cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]; // Make a cell array
+
+// Make an Array out of the cells
+let cellArray = [cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8];
+timeDiv.textContent = `${hourTens}${hourOnes}:${minTens}${minOnes}:${secTens}${secOnes}`;
 
 //Winning Solutions **************************************************************************************************************************************
 
@@ -71,6 +74,7 @@ function selectCell() {
     if (playerTwoName !== '') {
       status.textContent = `Player: ${playerTwoName}'s turn!`;
     }
+
     // Change to computer's turn if one player game is clicked
     else {
       status.textContent = "Computer's turn!";
@@ -105,7 +109,7 @@ function selectCell() {
   }
 
   //If Computer's turn -----------------------------------------------------------------------------------------------------------------------------------
-   if (status.textContent === "Computer's turn!") {
+  if (status.textContent === "Computer's turn!") {
     setTimeout(dumbComputerAi, 1000);
     winCheck();
     if (winCheck() === true) {
