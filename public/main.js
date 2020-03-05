@@ -83,12 +83,12 @@ function selectCell() {
     //Checks if after click, player one wins on two player
     winCheck();
     if (winCheck() === true) {
-      if (status.textContent !== "Human's turn!") {
+      if (status.textContent === "Human's turn!") {
         status.textContent = `Player: ${playerOneName} has won!`;
       }
       // Checks if after click, human wins
       else {
-        status.textContent = 'The human wins!';
+        status.textContent = 'The Human wins!';
       }
     }
   }
@@ -282,9 +282,11 @@ twoPlayerButton.addEventListener('click', () => {
 onePlayerButton.addEventListener('click', () => {
   // disables one player button
   event.target.disabled = true;
+  onePlayerButton.style.setProperty('background-color', 'grey')
 
   // disables two player button
   twoPlayerButton.disabled = true;
+  twoPlayerButton.style.setProperty('background-color', 'grey')
 
   //Starts with Player X
   status.textContent = "Human's turn!";
