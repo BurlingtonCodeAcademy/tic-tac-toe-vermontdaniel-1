@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tic Tac Toe</title>
+    <link type="text/css" rel="stylesheet" href="new-style.css" />
+  </head>
+
+  <body>
+    <!--Header-->
+    <div id="header">
+      <!--Title-->
+      <div id="title">TIC TAC TOE</div>
+      <!--Time-->
+      <div id="time"></div>
+    </div>
+
+    <!--Tic Tac Toe Board-->
+    <div id="board">
+      <!--Bottom Row-->
+      <div id="cell-0" class="cell"></div>
+      <div id="cell-1" class="cell"></div>
+      <div id="cell-2" class="cell"></div>
+
+      <!--Middle Row-->
+      <div id="cell-3" class="cell"></div>
+      <div id="cell-4" class="cell"></div>
+      <div id="cell-5" class="cell"></div>
+
+      <!--Top Row-->
+      <div id="cell-6" class="cell"></div>
+      <div id="cell-7" class="cell"></div>
+      <div id="cell-8" class="cell"></div>
+    </div>
+
+    <!--Footer-->
+    <div id="footer">
+      <!--Status of Game-->
+      <div id="status"></div>
+
+      <!--Buttons-->
+
+      <button id="player-one" type="button" class="button">One Player</button>
+      <button id="reset" type="button" class="button">Reset Game</button>
+      <button id="player-two" type="button" class="button">Two Players</button>
+
+      <!--Name Input Fields-->
+
+      <input id="player-one-name" type="text" placeholder="Player One's Name:" class="input" />
+      <input id="player-two-name" type="text" placeholder="Player Two's Name:" class="input" />
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
